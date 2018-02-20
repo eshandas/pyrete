@@ -27,3 +27,9 @@ pip install pyrate
 
 
 ## Future
+
+
+## Thanks To
+
+* Akshata Puranik
+* Meghana M R
