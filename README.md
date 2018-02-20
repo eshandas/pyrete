@@ -1,4 +1,4 @@
-# Pyrate
+# Pyrete
 A Rete algorithm based Rule Engine built purely in Python
 
 ## Version
