@@ -1,0 +1,22 @@
+{% extends 'site_templates/site_master.html' %}
+{% load staticfiles %}
+
+{% block header_block %}
+    <link rel="stylesheet" href="{% static 'rule_engine/rules/css/rules.css' %}">
+{% endblock %}
+
+{% block hidden_block %}
+    <h3>Put hidden fields here</h3>
+{% endblock %}
+
+{% block body_block %}
+    <h2>I am body block</h2>
+{% endblock %}
+
+{% block footer_block %}
+    <h2>I am footer block</h2>
+{% endblock %}
+
+{% block js_block %}
+    <script type="text/javascript" src="{% static 'rule_engine/rules/js/rules.js' %}"></script>
+{% endblock %}
