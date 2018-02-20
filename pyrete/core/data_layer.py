@@ -1,4 +1,4 @@
-from pyrate import settings
+from pyrete import settings
 
 from . import (
     get_attr_name,
@@ -15,8 +15,8 @@ class DataLayer(object):
 
     .. code-block:: python
 
-        from pyrate.core.nodes import ReteGraph
-        from pyrate.core.data_layer import DataLayer
+        from pyrete.core.nodes import ReteGraph
+        from pyrete.core.data_layer import DataLayer
 
         rule = {
             'key': 'some_rule',

@@ -1,4 +1,4 @@
-from pyrate.core.data_layer import DataLayer
+from pyrete.core.data_layer import DataLayer
 
 
 mapper = DataLayer()

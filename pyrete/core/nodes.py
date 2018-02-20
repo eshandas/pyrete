@@ -1,9 +1,9 @@
 # import the logging library
 import logging
-import json
+
 import importlib
 
-from pyrate import settings
+from pyrete import settings
 
 from . import (
     compare_values,
@@ -13,18 +13,13 @@ from . import (
     get_object_name,
     get_dict_value,
     get_value,
+    ParserLiterals,
 )
 
-from rest_framework import exceptions
 import requests
 
-from pyrate.core.constants import (
+from pyrete.core.constants import (
     TriggerType,
-)
-
-from pyrate.core import (
-    get_attr_name,
-    ParserLiterals,
 )
 
 

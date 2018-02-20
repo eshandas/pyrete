@@ -1,17 +1,17 @@
-from pyrate.core.nodes import (
+from pyrete.core.nodes import (
     ReteGraph,
 )
-from pyrate.core.engine import (
+from pyrete.core.engine import (
     RuleEngine,
 )
-from pyrate.core.data_layer import (
+from pyrete.core.data_layer import (
     DataLayer,
 )
-from pyrate.core.variable_processor import (
+from pyrete.core.variable_processor import (
     VariableProcessor,
 )
 
-from pyrate.core.graph_methods import get_all_alpha_nodes
+from pyrete.core.graph_methods import get_all_alpha_nodes
 
 
 rule = {

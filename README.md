@@ -17,7 +17,7 @@ A Rete algorithm based Rule Engine built purely in Python
 Using pip
 
 ```
-pip install pyrate
+pip install pyrete
 ```
 
 ## Setup

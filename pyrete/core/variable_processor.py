@@ -16,9 +16,9 @@ class VariableProcessor(object):
 
     .. code-block:: python
 
-        from pyrate.core.nodes import ReteGraph
-        from pyrate.core.data_layer import DataLayer
-        from pyrate.core.variable_processor import VariableProcessor
+        from pyrete.core.nodes import ReteGraph
+        from pyrete.core.data_layer import DataLayer
+        from pyrete.core.variable_processor import VariableProcessor
 
         rule = {
             'key': 'some_rule',
