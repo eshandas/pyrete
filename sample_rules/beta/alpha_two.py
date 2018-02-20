@@ -1,21 +1,21 @@
-from rule_engine.core.nodes import (
+from pyrate.core.nodes import (
     ReteGraph,
 )
-from rule_engine.core.engine import (
+from pyrate.core.engine import (
     RuleEngine,
 )
-from rule_engine.core.data_layer import (
+from pyrate.core.data_layer import (
     DataLayer,
 )
-from rule_engine.core.variable_processor import (
+from pyrate.core.variable_processor import (
     VariableProcessor,
 )
 
-from rule_engine.core.graph_methods import get_all_alpha_nodes
+from pyrate.core.graph_methods import get_all_alpha_nodes
 
 
 rule = {
-    'key': 'alpha_two_all_one_any',
+    'key': 'alpha_two',
     'description': 'A rule with only one alpha check in all',
     'collections': [
         'persons',
@@ -30,11 +30,11 @@ rule = {
                 'operator': 'equal_to',
                 'value': 'black'
             },
-            # {
-            #     'name': 'persons>>gender',
-            #     'operator': 'equal_to',
-            #     'value': 'F'
-            # },
+            {
+                'name': 'persons>>preference',
+                'operator': 'equal_to',
+                'value': 'BMW'
+            },
         ],
         'all': [
             {
@@ -110,20 +110,24 @@ trigger = engine.run_efficiently(
     key=rule['key'],
     email='test@mail.com')
 
-
 # ---------------------- Expected Output
+# PROCESSING VARIABLES...
+
+
+# PROCESSING RULES...
+# before checking file size
+# here
+
 # ....................................
 # For ObjectNode: persons
 # Items Processed: 4
-# Items Passed: 3
+# Items Passed: 1
 
 # ....................................
 # For ObjectNode: vehicles
 # Items Processed: 5
 # Items Passed: 1
 # ...........................
-# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
-# ...........................
-# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
-# ...........................
-# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e537'), u'name': u'Rory'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
+# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy', u'preference': u'BMW'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
+# Executing the following triggers:
+# Key: award_points, Trigger Type: print

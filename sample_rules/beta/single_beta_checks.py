@@ -1,21 +1,21 @@
-from rule_engine.core.nodes import (
+from pyrate.core.nodes import (
     ReteGraph,
 )
-from rule_engine.core.engine import (
+from pyrate.core.engine import (
     RuleEngine,
 )
-from rule_engine.core.data_layer import (
+from pyrate.core.data_layer import (
     DataLayer,
 )
-from rule_engine.core.variable_processor import (
+from pyrate.core.variable_processor import (
     VariableProcessor,
 )
 
-from rule_engine.core.graph_methods import get_all_alpha_nodes
+from pyrate.core.graph_methods import get_all_alpha_nodes
 
 
 rule = {
-    'key': 'alpha_two_all_one_any',
+    'key': 'single_beta_checks_1',
     'description': 'A rule with only one alpha check in all',
     'collections': [
         'persons',
@@ -25,19 +25,23 @@ rule = {
     ],
     'when': {
         'any': [
+            {
+                'name': 'persons>>fav_color',
+                'operator': 'equal_to',
+                'value': '^^vehicles>>color'
+            }
         ],
         'all': [
             {
-                'name': 'persons>>preference',
+                'name': 'vehicles>>company',
                 'operator': 'equal_to',
-                'value': '^^vehicles>>company'
+                'value': '^^persons>>preference'
             }
         ]},
     'then': [
         {
             'key': 'award_points',
             'trigger_type': 'print',
-            'webhook_details': {},
             'params': [
                 {
                     'name': 'vehicle_model',
@@ -96,19 +100,14 @@ trigger = engine.run_efficiently(
 
 # ---------------------- Expected Output
 # ....................................
-# For ObjectNode: persons
-# Items Processed: 4
-# Items Passed: 4
-
-# ....................................
 # For ObjectNode: vehicles
 # Items Processed: 5
 # Items Passed: 5
 # ...........................
-# Data: {'persons': {u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata', u'preference': u'Maruti'}, 'vehicles': {u'company': u'Maruti', u'_id': ObjectId('5a0422c6bae3828177788d49'), u'model': u'Omni'}}
+# Data: {'persons': {u'fav_color': u'red', u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata', u'preference': u'Maruti'}, 'vehicles': {u'color': u'red', u'company': u'Maruti', u'_id': ObjectId('5a0422c6bae3828177788d49'), u'model': u'Omni'}}
 # ...........................
-# Data: {'persons': {u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata', u'preference': u'Maruti'}, 'vehicles': {u'company': u'Maruti', u'_id': ObjectId('5a042309bae3828177788d4b'), u'model': u'Swift'}}
+# Data: {'persons': {u'fav_color': u'red', u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata', u'preference': u'Maruti'}, 'vehicles': {u'color': u'red', u'company': u'Maruti', u'_id': ObjectId('5a042309bae3828177788d4b'), u'model': u'Swift'}}
 # ...........................
-# Data: {'persons': {u'_id': ObjectId('5a1bec38814511659779e535'), u'name': u'Eshan', u'preference': u'Tesla'}, 'vehicles': {u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
+# Data: {'persons': {u'fav_color': u'black', u'_id': ObjectId('5a1bec38814511659779e535'), u'name': u'Eshan', u'preference': u'Tesla'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
 # ...........................
-# Data: {'persons': {u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy', u'preference': u'BMW'}, 'vehicles': {u'company': u'BMW', u'_id': ObjectId('5a0422eabae3828177788d4a'), u'model': u'BMW1'}}
+# Data: {'persons': {u'fav_color': u'black', u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy', u'preference': u'BMW'}, 'vehicles': {u'color': u'black', u'company': u'BMW', u'_id': ObjectId('5a0422eabae3828177788d4a'), u'model': u'BMW1'}}

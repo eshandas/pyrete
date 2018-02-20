@@ -3,7 +3,7 @@ import logging
 import json
 import importlib
 
-from rule_engine import settings
+from pyrate import settings
 
 from . import (
     compare_values,
@@ -18,11 +18,11 @@ from . import (
 from rest_framework import exceptions
 import requests
 
-from rule_engine.core.constants import (
+from pyrate.core.constants import (
     TriggerType,
 )
 
-from rule_engine.core import (
+from pyrate.core import (
     get_attr_name,
     ParserLiterals,
 )

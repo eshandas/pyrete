@@ -1,53 +1,36 @@
-from rule_engine.core.nodes import (
+from pyrate.core.nodes import (
     ReteGraph,
 )
-from rule_engine.core.engine import (
+from pyrate.core.engine import (
     RuleEngine,
 )
-from rule_engine.core.data_layer import (
+from pyrate.core.data_layer import (
     DataLayer,
 )
-from rule_engine.core.variable_processor import (
+from pyrate.core.variable_processor import (
     VariableProcessor,
 )
 
-from rule_engine.core.graph_methods import get_all_alpha_nodes
+from pyrate.core.graph_methods import get_all_alpha_nodes
 
 
 rule = {
-    'key': 'alpha_two',
+    'key': 'single_alpha_all',
     'description': 'A rule with only one alpha check in all',
     'collections': [
-        'persons',
-        'vehicles',
+        'persons'
     ],
     'variables': [
     ],
     'when': {
         'any': [
-            {
-                'name': 'vehicles>>color',
-                'operator': 'equal_to',
-                'value': 'black'
-            },
-            {
-                'name': 'persons>>preference',
-                'operator': 'equal_to',
-                'value': 'BMW'
-            },
         ],
         'all': [
             {
-                'name': 'persons>>gender',
+                'name': 'persons>>fav_color',
                 'operator': 'equal_to',
-                'value': 'F'
-            },
-            {
-                'name': 'vehicles>>company',
-                'operator': 'equal_to',
-                'value': 'Tesla'
-            },
-
+                'value': 'red'
+            }
         ]},
     'then': [
         {
@@ -59,10 +42,6 @@ rule = {
                     'name': 'person_name',
                     'value': 'persons>>name'
                 },
-                {
-                    'name': 'vehicle_model',
-                    'value': 'vehicles>>model'
-                }
             ]
         }]}
 
@@ -110,24 +89,11 @@ trigger = engine.run_efficiently(
     key=rule['key'],
     email='test@mail.com')
 
+
 # ---------------------- Expected Output
-# PROCESSING VARIABLES...
-
-
-# PROCESSING RULES...
-# before checking file size
-# here
-
 # ....................................
 # For ObjectNode: persons
 # Items Processed: 4
 # Items Passed: 1
-
-# ....................................
-# For ObjectNode: vehicles
-# Items Processed: 5
-# Items Passed: 1
 # ...........................
-# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy', u'preference': u'BMW'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
-# Executing the following triggers:
-# Key: award_points, Trigger Type: print
+# Data: {'persons': {u'fav_color': u'red', u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata'}}

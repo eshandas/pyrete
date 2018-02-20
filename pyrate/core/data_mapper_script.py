@@ -1,4 +1,4 @@
-from rule_engine.core.data_layer import DataLayer
+from pyrate.core.data_layer import DataLayer
 
 
 mapper = DataLayer()

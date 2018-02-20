@@ -1,22 +1,23 @@
-from rule_engine.core.nodes import (
+from pyrate.core.nodes import (
     ReteGraph,
 )
-from rule_engine.core.engine import (
+from pyrate.core.engine import (
     RuleEngine,
 )
-from rule_engine.core.data_layer import (
+from pyrate.core.data_layer import (
     DataLayer,
 )
-from rule_engine.core.variable_processor import (
+from pyrate.core.variable_processor import (
     VariableProcessor,
 )
 
 
 rule = {
-    'key': 'some_rule',
-    'description': 'Some awesome description',
+    'key': 'second_order',
+    'description': 'As a user, I would like to be credited with +20pts per $10 spent for second order within 15 days from the first order',
     'collections': [
-        'orders'
+        'orders',
+        'webhook',
     ],
     'variables': [
         {
@@ -37,24 +38,12 @@ rule = {
         },
         {
             'name': '$days_difference',
-            'value': '__days_diff::$second_order_date||$first_order_date'
-        },
-        {
-            'name': '$total_price',
-            'value': 'webhook>>total_price'
-        },
-        {
-            'name': '$taxes',
-            'value': 'webhook>>taxes'
-        },
-        {
-            'name': '$grand_total',
-            'value': '__add::$total_price||$taxes'
+            'value': '__days_diff::$second_order_date||$first_order_date',
+            'datasource': None
         }
     ],
     'when': {
-        'any': [
-        ],
+        'any': [],
         'all': [
             {
                 'name': '$email_order_count',
@@ -66,13 +55,18 @@ rule = {
                 'operator': 'less_than_equal_to',
                 'value': 15
             },
+            {
+                'name': 'webhook>>email',
+                'operator': 'equal_to',
+                'value': '^^orders>>email'
+            },
         ]},
     'then': [
         {
             'key': 'create_order',
             'trigger_type': 'webhook',
             'webhook_details': {
-                'url': 'https://www.google.co.in/',
+                'url': 'https://requestb.in/1bc1a3p1',
                 'method': 'POST'},
             'params': [
                 {
@@ -86,8 +80,7 @@ rule = {
                 {
                     'name': 'count',
                     'value': 'note_attributes__count'
-                }
-            ]
+                }]
         },
         {
             'key': 'award_points',
@@ -97,8 +90,7 @@ rule = {
                 {
                     'name': 'points',
                     'value': '1000__as_str'
-                }
-            ]
+                }]
         }]}
 
 
@@ -112,17 +104,16 @@ data = DataLayer().get_data(
     filter={},
     limit=10)
 
-data['webhook'] = {
+data['webhook'] = [{
     '_id': 'Webhook_data',
     'email': 'testar7@mailinator.com',
     'total_price': '57.00',
-    'taxes': '12.50',
-    'note_attributes': [1, 2, 3]}
+    'note_attributes': [1, 2, 3]}]
 
 
 # ---------------------- Rule variables
 print '\n\nPROCESSING VARIABLES...'
-VariableProcessor().eval_variables(
+VariableProcessor().process_variables(
     data=data,
     variable_objs=rule['variables'])
 
@@ -132,4 +123,6 @@ print '\n\nPROCESSING RULES...'
 engine = RuleEngine()
 trigger = engine.run_efficiently(
     graphs=[graph],
-    data=[webhook_data])
+    data=data,
+    key=rule['key'],
+    email='test@mail.com')

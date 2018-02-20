@@ -1,13 +1,13 @@
-from rule_engine.core.nodes import (
+from pyrate.core.nodes import (
     ReteGraph,
 )
-from rule_engine.core.engine import (
+from pyrate.core.engine import (
     RuleEngine,
 )
-from rule_engine.core.data_layer import (
+from pyrate.core.data_layer import (
     DataLayer,
 )
-from rule_engine.core.variable_processor import (
+from pyrate.core.variable_processor import (
     VariableProcessor,
 )
 

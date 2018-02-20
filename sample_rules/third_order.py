@@ -1,20 +1,20 @@
-from rule_engine.core.nodes import (
+from pyrate.core.nodes import (
     ReteGraph,
 )
-from rule_engine.core.engine import (
+from pyrate.core.engine import (
     RuleEngine,
 )
-from rule_engine.core.data_layer import (
+from pyrate.core.data_layer import (
     DataLayer,
 )
-from rule_engine.core.variable_processor import (
+from pyrate.core.variable_processor import (
     VariableProcessor,
 )
 
 
 rule = {
-    'key': 'first_order',
-    'description': 'As a user, I would like to be credited with 1000 points on performing the First Purchase',
+    'key': 'second_order',
+    'description': 'As a user, I would like to be credited with +30pts per $10 spent for Third order within 30 days from the first order',
     'collections': [
         'orders',
         'webhook',
@@ -28,6 +28,18 @@ rule = {
             'name': '$email_order_count',
             'value': 'orders>>email__get_frequency::$email'
         },
+        {
+            'name': '$first_order_date',
+            'value': 'orders>>created_at__get_by_index::email=$email||0'
+        },
+        {
+            'name': '$third_order_date',
+            'value': 'orders>>created_at__get_by_index::email=$email||2'
+        },
+        {
+            'name': '$days_difference',
+            'value': '__days_diff::$third_order_date||$first_order_date'
+        }
     ],
     'when': {
         'any': [],
@@ -35,7 +47,12 @@ rule = {
             {
                 'name': '$email_order_count',
                 'operator': 'equal_to',
-                'value': 1
+                'value': 3
+            },
+            {
+                'name': '$days_difference',
+                'operator': 'less_than_equal_to',
+                'value': 30
             },
             {
                 'name': 'webhook>>email',
@@ -48,35 +65,32 @@ rule = {
             'key': 'create_order',
             'trigger_type': 'webhook',
             'webhook_details': {
-                'url': 'https://requestb.in/18xz2ux1',
+                'url': 'https://requestb.in/1bc1a3p1',
                 'method': 'POST'},
             'params': [
                 {
-                    'name': 'customer_email',
-                    'value': 'webhook>>email'
+                    'name': 'email_str',
+                    'value': 'email__as_str'
                 },
                 {
-                    'name': 'event_key',
-                    'value': 'first_purchase__as_str'
-                }
-            ],
+                    'name': 'price',
+                    'value': 'total_price'
+                },
+                {
+                    'name': 'count',
+                    'value': 'note_attributes__count'
+                }]
         },
-        # {
-        #     'key': 'award_points',
-        #     'trigger_type': 'method',
-        #     'method': 'events.tasks.loyalty_event',
-        #     'params': [
-        #         {
-        #             'name': 'customer_email',
-        #             'value': 'webhook>>email'
-        #         },
-        #         {
-        #             'name': 'event_key',
-        #             'value': 'first_purchase__as_str'
-        #         }
-        #     ]
-        # }
-        ]}
+        {
+            'key': 'award_points',
+            'trigger_type': 'loyalty_event',
+            'webhook_details': {},
+            'params': [
+                {
+                    'name': 'points',
+                    'value': '1000__as_str'
+                }]
+        }]}
 
 
 graph = ReteGraph()
@@ -87,11 +101,11 @@ graph.load_rule(rule)
 data = DataLayer().get_data(
     rules=[rule],
     filter={},
-    limit=10)
+    limit=0)
 
 data['webhook'] = [{
     '_id': 'Webhook_data',
-    'email': 'test28@mailinator.com',
+    'email': 'testan6@mailinator.com',
     'total_price': '57.00',
     'note_attributes': [1, 2, 3]}]
 

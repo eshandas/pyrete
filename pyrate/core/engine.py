@@ -7,7 +7,7 @@ import logging
 
 import os
 
-from rule_engine import settings
+from pyrate import settings
 
 from .variable_processor import eval_variables
 

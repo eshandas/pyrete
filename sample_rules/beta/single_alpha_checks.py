@@ -1,17 +1,17 @@
-from rule_engine.core.nodes import (
+from pyrate.core.nodes import (
     ReteGraph,
 )
-from rule_engine.core.engine import (
+from pyrate.core.engine import (
     RuleEngine,
 )
-from rule_engine.core.data_layer import (
+from pyrate.core.data_layer import (
     DataLayer,
 )
-from rule_engine.core.variable_processor import (
+from pyrate.core.variable_processor import (
     VariableProcessor,
 )
 
-from rule_engine.core.graph_methods import get_all_alpha_nodes
+from pyrate.core.graph_methods import get_all_alpha_nodes
 
 
 rule = {
@@ -25,11 +25,11 @@ rule = {
     ],
     'when': {
         'any': [
-            {
-                'name': 'vehicles>>color',
-                'operator': 'equal_to',
-                'value': 'black'
-            },
+            # {
+            #     'name': 'vehicles>>color',
+            #     'operator': 'equal_to',
+            #     'value': 'black'
+            # },
             {
                 'name': 'persons>>gender',
                 'operator': 'equal_to',
@@ -38,14 +38,14 @@ rule = {
         ],
         'all': [
             # {
-            #     'name': 'persons>>preference',
+            #     'name': 'persons>>gender',
             #     'operator': 'equal_to',
-            #     'value': 'Maruti'
+            #     'value': 'F'
             # },
             {
-                'name': 'vehicles>>company',
+                'name': 'vehicles>>color',
                 'operator': 'equal_to',
-                'value': 'Tesla'
+                'value': 'black'
             },
 
         ]},
@@ -56,12 +56,12 @@ rule = {
             'webhook_details': {},
             'params': [
                 {
-                    'name': 'person_name',
-                    'value': 'persons>>name'
-                },
-                {
                     'name': 'vehicle_model',
                     'value': 'vehicles>>model'
+                },
+                {
+                    'name': 'person_name',
+                    'value': 'persons>>name'
                 }
             ]
         }]}
@@ -110,6 +110,7 @@ trigger = engine.run_efficiently(
     key=rule['key'],
     email='test@mail.com')
 
+
 # ---------------------- Expected Output
 # ....................................
 # For ObjectNode: persons
@@ -119,10 +120,16 @@ trigger = engine.run_efficiently(
 # ....................................
 # For ObjectNode: vehicles
 # Items Processed: 5
-# Items Passed: 1
+# Items Passed: 2
 # ...........................
-# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
+# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata'}, 'vehicles': {u'color': u'black', u'model': u'BMW1', u'_id': ObjectId('5a0422eabae3828177788d4a')}}
 # ...........................
-# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
+# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e534'), u'name': u'akshata'}, 'vehicles': {u'color': u'black', u'model': u'S3', u'_id': ObjectId('5a1d2759a81ea91853bc5411')}}
 # ...........................
-# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e537'), u'name': u'Rory'}, 'vehicles': {u'color': u'black', u'company': u'Tesla', u'_id': ObjectId('5a1d2759a81ea91853bc5411'), u'model': u'S3'}}
+# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy'}, 'vehicles': {u'color': u'black', u'model': u'BMW1', u'_id': ObjectId('5a0422eabae3828177788d4a')}}
+# ...........................
+# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e536'), u'name': u'Amy'}, 'vehicles': {u'color': u'black', u'model': u'S3', u'_id': ObjectId('5a1d2759a81ea91853bc5411')}}
+# ...........................
+# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e537'), u'name': u'Rory'}, 'vehicles': {u'color': u'black', u'model': u'BMW1', u'_id': ObjectId('5a0422eabae3828177788d4a')}}
+# ...........................
+# Data: {'persons': {u'gender': u'F', u'_id': ObjectId('5a1bec38814511659779e537'), u'name': u'Rory'}, 'vehicles': {u'color': u'black', u'model': u'S3', u'_id': ObjectId('5a1d2759a81ea91853bc5411')}}
