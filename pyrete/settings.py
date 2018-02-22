@@ -1,8 +1,5 @@
-from pymongo import MongoClient
-
-uri = 'mongodb://localhost:27017/loyalty_engine'
-client = MongoClient(uri)
-DB = client['loyalty_engine']
+import os
+import importlib
 
 
-LOG_FILE = '/home/yml/Documents/Projects/LoyaltyProgram/loyalty/data_info.log'
+settings = importlib.import_module(os.environ.data['PYRETE_SETTINGS_MODULE'])

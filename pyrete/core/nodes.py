@@ -3,7 +3,7 @@ import logging
 
 import importlib
 
-from pyrete import settings
+from pyrete.settings import settings
 
 from . import (
     compare_values,

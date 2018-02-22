@@ -7,7 +7,7 @@ import logging
 
 import os
 
-from pyrete import settings
+from pyrete.settings import settings
 
 from .variable_processor import eval_variables
 

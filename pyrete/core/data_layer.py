@@ -1,4 +1,4 @@
-from pyrete import settings
+from pyrete.settings import settings
 
 from . import (
     get_attr_name,
