@@ -1,12 +1,13 @@
 Metadata-Version: 1.1
 Name: pyrete
-Version: 0.1.0
+Version: 0.2.0
 Summary: Rete algorithm based Rule Engine built on Python
 Home-page: https://github.com/eshandas/pyrete
 Author: Eshan Das
 Author-email: eshandasnit@gmail.com
 License: UNKNOWN
-Download-URL: https://github.com/eshandas/pyrete/archive/0.1.0.tar.gz
+Download-URL: https://github.com/eshandas/pyrete/archive/0.2.0.tar.gz
+Description-Content-Type: UNKNOWN
 Description: UNKNOWN
 Keywords: rete,net,network,rule,engine
 Platform: UNKNOWN
