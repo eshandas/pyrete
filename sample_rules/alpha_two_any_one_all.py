@@ -72,9 +72,9 @@ graph.load_rule(rule)
 
 
 def print_details(node):
-    print '..............................'
-    print 'Id: %s' % node.id
-    print 'Type: %s' % node.get_type()
+    print('..............................')
+    print('Id: %s' % node.id)
+    print('Type: %s' % node.get_type())
 
 
 def traverse_children(nodes):
@@ -95,14 +95,14 @@ data = DataLayer().get_data(
 
 
 # ---------------------- Rule variables
-print '\n\nPROCESSING VARIABLES...'
+print('\n\nPROCESSING VARIABLES...')
 VariableProcessor().process_variables(
     data=data,
     variable_objs=rule['variables'])
 
 
 # ---------------------- Initiate rule engine
-print '\n\nPROCESSING RULES...'
+print('\n\nPROCESSING RULES...')
 engine = RuleEngine()
 trigger = engine.run_efficiently(
     graphs=[graph],
