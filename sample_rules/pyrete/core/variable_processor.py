@@ -106,7 +106,7 @@ class VariableProcessor(object):
             if value is None:
                 print('None')
             else:
-                print('Value: %s' % str(value))
+                print(('Value: %s' % str(value)))
             variable['value'] = value
 
             # if value is None:
@@ -124,7 +124,7 @@ class VariableProcessor(object):
             * **value**: The value of the evaluated variable.
         """
         for variable_obj in variable_objs:
-            if isinstance(variable_obj['value'], (unicode, str)) and variable_name in variable_obj['value']:
+            if isinstance(variable_obj['value'], str) and variable_name in variable_obj['value']:
                 if value is None:
                     variable_obj['value'] = variable_obj['value'].replace(variable_name, 'None')
                 else:
@@ -144,7 +144,7 @@ class VariableProcessor(object):
             The evaluated value of the variable. Modifier functions are also executed if present.
         """
         print('...........................')
-        print('Processing %s' % variable_val)
+        print(('Processing %s' % variable_val))
         # NOTE: Special treatment given to webhook to process variables
         data = data[0] if datasource == 'webhook' else data
 
@@ -170,8 +170,8 @@ class VariableProcessor(object):
         function_params = function_tokens[1] if len(function_tokens) > 1 else None
         function['params'] = function_params.split(ParserLiterals.MULTI_PARAMS_LITERAL) if function_params else None
 
-        print('Function name: %s' % function['name'])
-        print('Function params: %s' % ', '.join(function['params']))
+        print(('Function name: %s' % function['name']))
+        print(('Function params: %s' % ', '.join(function['params'])))
 
         # Execute the function
         return CollectionFunctions.aggregate(

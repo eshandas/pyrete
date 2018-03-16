@@ -51,8 +51,8 @@ graph.load_rule(rule)
 
 def print_details(node):
     print('..............................')
-    print('Id: %s' % node.id)
-    print('Type: %s' % node.get_type())
+    print(('Id: %s' % node.id))
+    print(('Type: %s' % node.get_type()))
 
 
 def traverse_children(nodes):
@@ -60,10 +60,6 @@ def traverse_children(nodes):
         node.print_details()
         traverse_children(node.children)
 
-
-traverse_children(graph.root_node.children)
-
-get_all_alpha_nodes(graph.root_node.children[0].children)
 
 # ---------------------- Fetch data from DB
 data = DataLayer().get_data(

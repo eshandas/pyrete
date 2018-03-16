@@ -5,7 +5,7 @@ def _print_upper_line(length):
     _offset = (_screen_width / 2) - (length / 2)
     _ = ' ' * _offset
     _ += '_' * (length + 4)
-    print(_ + '\n')
+    print((_ + '\n'))
 
 
 def _print_lower_line(length):
@@ -22,8 +22,8 @@ def _print_node(node):
 def _print_children(nodes):
     _
     _gap = ' ' * (_screen_width / 2)
-    print(_gap + '|')
-    print('_' * (count * 20))
+    print((_gap + '|'))
+    print(('_' * (count * 20)))
 
 
 class GraphPrinter(object):

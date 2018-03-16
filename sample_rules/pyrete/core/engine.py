@@ -40,7 +40,7 @@ class NodeStack(object):
 
     def print_stack(self):
         for item in self.items:
-            print('item %s with id %d' % (type(item), item.id))
+            print(('item %s with id %d' % (type(item), item.id)))
 
 
 class RuleEngine(object):
@@ -127,9 +127,9 @@ class RuleEngine(object):
                 items_passed += 1
             items_processed += 1
         print('\n....................................')
-        print('For ObjectNode: %s' % object_type)
-        print('Items Processed: %d' % items_processed)
-        print('Items Passed: %d' % items_passed)
+        print(('For ObjectNode: %s' % object_type))
+        print(('Items Processed: %d' % items_processed))
+        print(('Items Passed: %d' % items_passed))
         data_info = {
             'object': object_type,
             'items_processed': items_processed,

@@ -78,7 +78,7 @@ class DataLayer(object):
 
         """
         key_list = []
-        for key in doc.keys():
+        for key in list(doc.keys()):
             # Add parent.key if parent is present
             if parent:
                 key_list.append(parent + '.' + key)
@@ -147,7 +147,7 @@ class DataLayer(object):
             # Getting field names from "value" if it is a "join condition"
             condition_value = condition['value']
             if isinstance(
-                condition_value, (str, unicode)) and condition_value.startswith(
+                condition_value, str) and condition_value.startswith(
                     ParserLiterals.OBJECT_VALUE_IDENTIFIER):
                 condition_value = condition['value'].replace(ParserLiterals.OBJECT_VALUE_IDENTIFIER, '')
                 coll_name, attr_name, fn_name, fn_type = get_attr_name(condition_value)
@@ -164,7 +164,7 @@ class DataLayer(object):
             # Getting field names from "value" if it is a "join condition"
             condition_value = condition['value']
             if isinstance(
-                condition_value, (str, unicode)) and condition_value.startswith(
+                condition_value, str) and condition_value.startswith(
                     ParserLiterals.OBJECT_VALUE_IDENTIFIER):
                 condition_value = condition['value'].replace(ParserLiterals.OBJECT_VALUE_IDENTIFIER, '')
                 coll_name, attr_name, fn_name, fn_type = get_attr_name(condition_value)

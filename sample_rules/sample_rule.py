@@ -138,8 +138,8 @@ graph.load_rule(rule)
 
 def print_details(node):
     print('..............................')
-    print('Id: %s' % node.id)
-    print('Type: %s' % node.get_type())
+    print(('Id: %s' % node.id))
+    print(('Type: %s' % node.get_type()))
 
 
 def traverse_children(nodes):

@@ -1,4 +1,5 @@
 import iso8601
+from functools import reduce
 
 
 AGGREGATION_FUNCTION_NAMES = (
@@ -144,7 +145,7 @@ class DocumentFunctions(object):
         if fn_name == 'count':
             return len(value_list)
         elif fn_name == 'avg':
-            print(reduce(lambda x, y: x + y, value_list) / len(value_list))
+            print((reduce(lambda x, y: x + y, value_list) / len(value_list)))
 
 
 def get_dict_value(datum, key_chain, collection_name, collection=None):

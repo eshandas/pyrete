@@ -52,8 +52,8 @@ class Node(object):
 
     def print_details(self):
         print('..................')
-        print('Id: %s' % self.id)
-        print('Type: %s' % str(type(self)))
+        print(('Id: %s' % self.id))
+        print(('Type: %s' % str(type(self))))
 
     def get_name(self):
         return self.name
@@ -361,7 +361,7 @@ class ObjectNode(Node):
 
     def print_details(self):
         super(ObjectNode, self).print_details()
-        print('Object Type: %s' % self.object_type)
+        print(('Object Type: %s' % self.object_type))
 
     def __str__(self):
         return self.id
@@ -395,7 +395,7 @@ class AlphaNode(Node, EvaluableNode):
 
     def print_details(self):
         super(AlphaNode, self).print_details()
-        print('Condition Name: %s' % self.condition['name'])
+        print(('Condition Name: %s' % self.condition['name']))
 
     def __str__(self):
         return '%s - %s' % (self.id, self.condition['name'])
@@ -464,21 +464,21 @@ class GammaNode(Node, EvaluableNode):
         _condition_val_coll = _condition_val.split('>>')[0]
 
         # Evaluating condition['name']. Need to check both left and right datum
-        if _condition_name_coll in left_datum.keys():
+        if _condition_name_coll in list(left_datum.keys()):
             # NOTE: Appending the collection name again as the Gamma data has {'collection': {}} structure
             _temp_condition_name = '%s%s%s' % (_condition_name_coll, ParserLiterals.COLLECTION_LITERAL, _condition_name)
             left_value = self._eval_value(left_datum, _temp_condition_name, variables, _condition_name_coll)
-        elif _condition_name_coll in right_datum.keys():
+        elif _condition_name_coll in list(right_datum.keys()):
             # NOTE: Appending the collection name again as the Gamma data has {'collection': {}} structure
             _temp_condition_name = '%s%s%s' % (_condition_name_coll, ParserLiterals.COLLECTION_LITERAL, _condition_name)
             left_value = self._eval_value(right_datum, _temp_condition_name, variables, _condition_name_coll)
 
         # Evaluating condition['value']. Need to check both left and right datum
-        if _condition_val_coll in left_datum.keys():
+        if _condition_val_coll in list(left_datum.keys()):
             # NOTE: Appending the collection name again as the Gamma data has {'collection': {}} structure
             _temp_condition_val = '%s%s%s' % (_condition_val_coll, ParserLiterals.COLLECTION_LITERAL, _condition_val)
             right_value = self._eval_value(left_datum, _temp_condition_val, variables, _condition_val_coll)
-        elif _condition_val_coll in right_datum.keys():
+        elif _condition_val_coll in list(right_datum.keys()):
             # NOTE: Appending the collection name again as the Gamma data has {'collection': {}} structure
             _temp_condition_val = '%s%s%s' % (_condition_val_coll, ParserLiterals.COLLECTION_LITERAL, _condition_val)
             right_value = self._eval_value(right_datum, _temp_condition_val, variables, _condition_val_coll)
@@ -569,7 +569,7 @@ class TriggerNode(Node):
             elif method == 'DELETE':
                 r = requests.delete(url, headers=headers)
 
-            print(r.url)
+            print((r.url))
 
         elif then['trigger_type'] == TriggerType.METHOD:
             module_path = then['method'].split('.')
@@ -591,6 +591,6 @@ class TriggerNode(Node):
         """
         print('...........................')
         # print('Data: %s' % data[data.keys()[0]]['_id'])
-        print('Data: %s' % data)
+        print(('Data: %s' % data))
         for then in self.thens:
             self._trigger_rule(then, data)
