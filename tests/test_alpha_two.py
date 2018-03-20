@@ -16,7 +16,7 @@ from .pyrete.core.graph_methods import get_all_alpha_nodes
 from . import print_details, traverse_children
 
 
-def run_test():
+def test_rule():
     rule = {
         'key': 'alpha_two',
         'description': 'A rule with only one alpha check in all',

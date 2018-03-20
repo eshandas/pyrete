@@ -1,5 +1,5 @@
-from . import hello
-from .pyrete.core import ParserLiterals
+def inc(x):
+    return x + 1
 
-def run_hello():
-    hello()
+def test_answer():
+    assert inc(4) == 5
